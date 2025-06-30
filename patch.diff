@@ -1,0 +1,35 @@
+diff -ruN bsd-finger-0.17/finger/lprint.c bsd-finger-0.17-endo/finger/lprint.c
+--- bsd-finger-0.17/finger/lprint.c	1999-09-14 19:51:11.000000000 +0900
++++ bsd-finger-0.17-endo/finger/lprint.c	2025-06-30 13:40:42.989726684 +0900
+@@ -48,7 +48,7 @@
+ #include <sys/types.h>
+ #include <sys/file.h>
+ #include <sys/stat.h>
+-#include <sys/time.h>
++#include <time.h>
+ #include "finger.h"
+ 
+ static void lprint(PERSON *pn);
+diff -ruN bsd-finger-0.17/finger/sprint.c bsd-finger-0.17-endo/finger/sprint.c
+--- bsd-finger-0.17/finger/sprint.c	1999-12-13 03:59:33.000000000 +0900
++++ bsd-finger-0.17-endo/finger/sprint.c	2025-06-30 13:40:59.713627677 +0900
+@@ -40,7 +40,7 @@
+ #endif /* not lint */
+ 
+ #include <sys/types.h>
+-#include <sys/time.h>
++#include <time.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+diff -ruN bsd-finger-0.17/finger/util.c bsd-finger-0.17-endo/finger/util.c
+--- bsd-finger-0.17/finger/util.c	1999-09-29 07:53:58.000000000 +0900
++++ bsd-finger-0.17-endo/finger/util.c	2025-06-30 13:32:08.489772609 +0900
+@@ -115,6 +115,7 @@
+ 	}
+ 	while (nfields<4) fields[nfields++] = NULL;
+ 
++	pn->realname = NULL;
+ 	if (fields[0]) {
+ 		/* 
+ 		 * Ampersands in gecos get replaced by the capitalized login 
